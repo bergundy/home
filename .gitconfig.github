@@ -1,0 +1,14 @@
+[user]
+    name = Roey Berman
+    email = roey.berman@gmail.com
+[color]
+    ui = auto
+[core]
+    pager = less -FRSX
+    editor = vim
+[merge]
+    tool = vimdiff
+[alias]
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset - %C(bold blue)<%an>%Creset%C(yellow)%d%Creset %s %Cgreen(%cr)' --abbrev-commit
+[push]
+    default = simple
