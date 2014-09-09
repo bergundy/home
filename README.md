@@ -1,0 +1,4 @@
+home
+====
+
+home directory skeleton
