@@ -22,6 +22,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ap/vim-buftabline'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tomtom/tcomment_vim'
 
 call vundle#end()            " required
 
