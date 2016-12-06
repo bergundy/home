@@ -1,67 +1,89 @@
-" Pathogen load
-filetype off
+"-------------------------------------------------------------------------------
+" Vundle
+"-------------------------------------------------------------------------------
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-call pathogen#infect()
-call pathogen#helptags()
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-filetype on
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+"Plugin 'tpope/vim-repeat' " Conflicts with vim-tmux-navigator
+Plugin 'tpope/vim-surround'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'scrooloose/nerdtree'
+Plugin 'guns/vim-clojure-static'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'ap/vim-buftabline'
+Plugin 'christoomey/vim-tmux-navigator'
+
+call vundle#end()            " required
+
+" nerdtree
+map <C-N> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let NERDTreeIgnore = ['\.pyc$']
+
+" ctrl p
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+" syntastic
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_flake8_args='--max-line-length 120'
+
+"jedi
+let g:jedi#show_call_signatures = "2"
+
+
 filetype plugin indent on
 syntax on
 
-" tabs
+" buffers
+set hidden
+"nnoremap <Leader>n :bnext<CR>
+nnoremap <C-O> :bnext<CR>
+nnoremap <C-I> :bprev<CR>
+nnoremap <C-T> :vsp<CR>
+
+" indentation
 set tabstop=4
 set shiftwidth=4
 set expandtab
 set ai
 
-" appearance
-if has("gui_gtk2")
-  set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
-  colorscheme slate
-endif
+" ruby
+autocmd FileType ruby set tabstop=2 shiftwidth=2
+
+" http://vim.wikia.com/wiki/Modeline_magic
+set modeline
+set modelines=5
+
+" appearance - keep both
+colorscheme Monokai
+colorscheme badwolf
 
 
-set wildignore=*.pyc,*.bak,*.o,*.e,*~ " wildmenu: ignore these extensions
-set wildmenu                    " command-line completion in an enhanced mode
-set showcmd                     " display incomplete commands
+set wildignore=*.pyc,*.bak,*.o,*.e,*~   " wildmenu: ignore these extensions
+set wildmenu                            " command-line completion in an enhanced mode
+set showcmd                             " display incomplete commands
 
 
 let mapleader="`"
-
-"let g:C_MapLeader ='`'
-
-map <S-y> y$<CR>
-map <C-t> <ESC>:tabnew<CR>
-map <C-h> <ESC>:tabprev<CR>
-map <C-l> <ESC>:tabnext<CR>
-map <C-w> <ESC>:tabclose<CR>
 
 " always show statusline
 set ls=2
 set statusline=%F%m%r%h%w
 set statusline+=%= " stick to right
-set statusline+=%{fugitive#statusline()}
-set statusline+=\ [line\ %l\/%L\ %c%V]
-
-"-------------------------------------------------------------------------------
-" thrift
-"-------------------------------------------------------------------------------
-au BufRead,BufNewFile *.thrift set filetype=thrift
-au! Syntax thrift source ~/.vim/thrift.vim
-
-"-------------------------------------------------------------------------------
-" py.test
-"-------------------------------------------------------------------------------
-" Execute the tests
-nmap <silent><Leader>tf <Esc>:Pytest file<CR>
-nmap <silent><Leader>tc <Esc>:Pytest class<CR>
-nmap <silent><Leader>tm <Esc>:Pytest method<CR>
-" Cycle through test errors
-nmap <silent><Leader>tn <Esc>:Pytest next<CR>
-nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
-nmap <silent><Leader>te <Esc>:Pytest error<CR>
-
-autocmd FileType python map <buffer> <leader>8 :call Flake8()<CR>
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+set statusline+=[line\ %l\/%L\ %c%V]
 
 "-------------------------------------------------------------------------------
 " Add the virtualenv's site-packages to vim path
@@ -84,51 +106,34 @@ inoremap  ,  ,<Space>
 inoremap  ,, ,
 inoremap  ,<CR> ,<CR>
 
-"-------------------------------------------------------------------------------
-" autocomplete parenthesis, brackets, braces and quotes
-"-------------------------------------------------------------------------------
-"inoremap {      {}<Left>
-"inoremap {<CR>  {<CR>}<Esc>O<Tab>
-"inoremap {{     {
-"inoremap {}     {}
-"
-"inoremap (      ()<Left>
-"inoremap (<CR>  (<CR>)<Esc>O<Tab>
-"inoremap ((     (
-"inoremap ()     ()
-"
-"inoremap [      []<Left>
-"inoremap [<CR>  [<CR>]<Esc>O<Tab>
-"inoremap [[     [
-"inoremap []     []
-"
-"inoremap "      ""<Left>
-"inoremap ""     "
-"
-"inoremap '      ''<Left>
-"inoremap ''     '
 
+"-------------------------------------------------------------------------------
+" splits
+"-------------------------------------------------------------------------------
+set splitbelow
+set splitright
+
+" move faster between splits
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-L> <C-W><C-L>
+
+map <S-y> y$<CR>
+"map <C-t> <ESC>:tabnew<CR>
+"map <C-h> <ESC>:tabprev<CR>
+"map <C-l> <ESC>:tabnext<CR>
+"map <C-w> <ESC>:tabclose<CR>
+"
 "-------------------------------------------------------------------------------
 " navigation inside insert mode
 "-------------------------------------------------------------------------------
-imap <C-h> <Left>
-imap <C-j> <Down>
-imap <C-k> <Up>
-imap <C-l> <Right>
+"imap <C-h> <Left>
+"imap <C-j> <Down>
+"imap <C-k> <Up>
+"imap <C-l> <Right>
 imap <C-a> <C-o>^
 imap <C-e> <C-o>$
-
-"-------------------------------------------------------------------------------
-" c/c++ header file auto define
-"-------------------------------------------------------------------------------
-function! s:insert_gates()
-  let gatename = substitute(toupper(expand("%:t")), '[\.-]', "_", "g")
-  execute "normal! i#ifndef " . gatename
-  execute "normal! o#define " . gatename . " "
-  execute "normal! Go#endif /* " . gatename . " */"
-  execute "normal! O"
-endfunction
-autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
 
 "-------------------------------------------------------------------------------
 " strip trailing whitespace
@@ -148,17 +153,27 @@ nmap <silent> <Leader><space> :call <SID>StripTrailingWhitespaces()<CR>
 "autocmd FileType vim,python,js,css,less,html,c,cpp autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 match Todo /\s\+$/
 
-" unselect
-"nnoremap <CR> :nohlsearch<CR>
-" move faster between vertical splits
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-
-" navigate to next pep8 error
-nnoremap <C-N> :cn<CR>
-nnoremap <C-P> :cp<CR>
-
 "-------------------------------------------------------------------------------
-" doxygentoolkit plugin
+" auto set paste - http://superuser.com/questions/437730/always-use-set-paste-is-it-a-good-idea/904446#904446
 "-------------------------------------------------------------------------------
-let g:DoxygenToolkit_briefTag_pre=""
+function! WrapForTmux(s)
+  if !exists('$TMUX')
+    return a:s
+  endif
+
+  let tmux_start = "\<Esc>Ptmux;"
+  let tmux_end = "\<Esc>\\"
+
+  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+endfunction
+
+let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
