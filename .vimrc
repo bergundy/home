@@ -41,15 +41,18 @@ let g:syntastic_python_flake8_args='--max-line-length 120'
 "jedi
 let g:jedi#show_call_signatures = "2"
 
+" buftabline
+let g:buftabline_indicators = 1
+
 
 filetype plugin indent on
 syntax on
 
 " buffers
 set hidden
-"nnoremap <Leader>n :bnext<CR>
 nnoremap <C-O> :bnext<CR>
 nnoremap <C-I> :bprev<CR>
+nnoremap <C-W> :bdelete<CR>
 nnoremap <C-T> :vsp<CR>
 
 " indentation
