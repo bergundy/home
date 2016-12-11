@@ -23,6 +23,7 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'ap/vim-buftabline'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tomtom/tcomment_vim'
+Plugin 'hynek/vim-python-pep8-indent'
 
 call vundle#end()            " required
 
