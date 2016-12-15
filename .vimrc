@@ -13,7 +13,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 "Plugin 'tpope/vim-repeat' " Conflicts with vim-tmux-navigator
 Plugin 'tpope/vim-surround'
-Plugin 'flazz/vim-colorschemes'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'scrooloose/nerdtree'
@@ -24,6 +23,8 @@ Plugin 'ap/vim-buftabline'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'hynek/vim-python-pep8-indent'
+Plugin 'cocopon/iceberg.vim'
+
 
 call vundle#end()            " required
 
@@ -69,9 +70,8 @@ autocmd FileType ruby set tabstop=2 shiftwidth=2
 set modeline
 set modelines=5
 
-" appearance - keep both
-colorscheme Monokai
-colorscheme badwolf
+" appearance
+colorscheme iceberg
 
 
 set wildignore=*.pyc,*.bak,*.o,*.e,*~   " wildmenu: ignore these extensions
