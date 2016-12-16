@@ -183,3 +183,4 @@ function! XTermPasteBegin()
 endfunction
 
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+map <Leader>rp :call VimuxRunCommand("clear; python " . bufname("%"))<CR>
