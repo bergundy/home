@@ -14,17 +14,21 @@ Plugin 'tpope/vim-fugitive'
 "Plugin 'tpope/vim-repeat' " Conflicts with vim-tmux-navigator
 Plugin 'tpope/vim-surround'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'vim-syntastic/syntastic'
 Plugin 'scrooloose/nerdtree'
-Plugin 'guns/vim-clojure-static'
+Plugin 'ap/vim-buftabline'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'davidhalter/jedi-vim'
-Plugin 'ap/vim-buftabline'
+Plugin 'hynek/vim-python-pep8-indent'
+Plugin 'nvie/vim-flake8'
+" clojure
+Plugin 'guns/vim-clojure-static'
+" tmux
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'benmills/vimux'
+
 Plugin 'tomtom/tcomment_vim'
-Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'cocopon/iceberg.vim'
+Plugin 'cocopon/iceberg.vim' " colorscheme
 
 
 call vundle#end()            " required
@@ -40,9 +44,11 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 " syntastic
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_python_flake8_args='--max-line-length 120'
+let g:syntastic_always_populate_loc_list = 1
 
-"jedi
+" python
 let g:jedi#show_call_signatures = "2"
+let python_highlight_all = 1
 
 " buftabline
 let g:buftabline_indicators = 1
