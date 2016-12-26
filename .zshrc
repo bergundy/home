@@ -28,5 +28,6 @@ alias unix2date="perl -e 'print scalar localtime \$ARGV[0]'"
 alias ipof="ec2 ls -f private_ip"
 
 export EDITOR=vim
+export GOPATH=$HOME/go
 
 source ~/z/z.sh
