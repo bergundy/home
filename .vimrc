@@ -18,6 +18,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'ap/vim-buftabline'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'michaeljsmith/vim-indent-object'
 " golang
 Plugin 'fatih/vim-go'
 " python
