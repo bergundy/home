@@ -11,7 +11,7 @@ unsetopt share_history
 setopt print_exit_value
 
 function yalla {
-	perl -i -n -e "print unless (\$. == $1)" ~/.ssh/known_hosts;
+    perl -i -n -e "print unless (\$. == $1)" ~/.ssh/known_hosts;
 }
 
 kill_word() {
@@ -30,4 +30,4 @@ alias ipof="ec2 ls -f private_ip"
 export EDITOR=vim
 export GOPATH=$HOME/go
 
-source ~/z/z.sh
+[ -e "$HOME/z/z.sh" ] && source $HOME/z/z.sh
