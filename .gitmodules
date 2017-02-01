@@ -1,3 +1,6 @@
 [submodule ".vim/bundle/Vundle.vim"]
 	path = .vim/bundle/Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim.git
+[submodule "gcloud-zsh-completion"]
+	path = gcloud-zsh-completion
+	url = https://github.com/littleq0903/gcloud-zsh-completion

@@ -1,7 +1,7 @@
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="cloud"
 plugins=(git redis-cli zsh-syntax-highlighting docker supervisor docker-compose tmuxinator fabric)
-fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=($HOME/gcloud-zsh-completion/src $fpath)
 
 source $ZSH/oh-my-zsh.sh
 [ -e "$HOME/.zshrc.local" ] && source $HOME/.zshrc.local
