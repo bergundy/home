@@ -16,7 +16,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ap/vim-buftabline'
-Plugin 'vim-syntastic/syntastic'
+Plugin 'w0rp/ale'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'michaeljsmith/vim-indent-object'
 " golang
@@ -98,7 +98,7 @@ set ls=2
 set statusline=%F%m%r%h%w
 set statusline+=%= " stick to right
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%{ALEGetStatusLine()}
 set statusline+=%*
 set statusline+=[line\ %l\/%L\ %c%V]
 
