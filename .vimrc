@@ -27,6 +27,9 @@ Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'nvie/vim-flake8'
 " clojure
 Plugin 'guns/vim-clojure-static'
+" js
+Plugin 'maksimr/vim-jsbeautify'
+Plugin 'pangloss/vim-javascript'
 " tmux
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'benmills/vimux'
@@ -75,8 +78,12 @@ set shiftwidth=4
 set expandtab
 set ai
 
+" yaml
+autocmd FileType yaml set tabstop=2 softtabstop=2 shiftwidth=2
 " ruby
-autocmd FileType ruby set tabstop=2 shiftwidth=2
+autocmd FileType ruby set tabstop=2 softtabstop=2 shiftwidth=2
+" js
+autocmd FileType javascript set tabstop=2 softtabstop=2 shiftwidth=2
 
 " http://vim.wikia.com/wiki/Modeline_magic
 set modeline
