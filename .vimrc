@@ -37,8 +37,14 @@ Plugin 'benmills/vimux'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'cocopon/iceberg.vim' " colorscheme
 
+Plugin 'tikhomirov/vim-glsl'
+
+Plugin 'hashivim/vim-hashicorp-tools'
 
 call vundle#end()            " required
+
+call tcomment#DefineType('glsl', '// %s')
+call tcomment#DefineType('kivy', '# %s')
 
 " nerdtree
 map <C-N> :NERDTreeToggle<CR>
@@ -84,6 +90,8 @@ autocmd FileType yaml set tabstop=2 softtabstop=2 shiftwidth=2
 autocmd FileType ruby set tabstop=2 softtabstop=2 shiftwidth=2
 " js
 autocmd FileType javascript set tabstop=2 softtabstop=2 shiftwidth=2
+" terraform
+autocmd FileType tf set tabstop=2 softtabstop=2 shiftwidth=2
 
 " http://vim.wikia.com/wiki/Modeline_magic
 set modeline
