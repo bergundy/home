@@ -33,3 +33,5 @@ export EDITOR=vim
 export GOPATH=$HOME/go
 
 [ -e "$HOME/z/z.sh" ] && source $HOME/z/z.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
