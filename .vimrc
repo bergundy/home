@@ -27,6 +27,8 @@ Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'nvie/vim-flake8'
 " clojure
 Plugin 'guns/vim-clojure-static'
+" rust
+Plugin 'rust-lang/rust.vim'
 " js
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'pangloss/vim-javascript'
@@ -66,6 +68,8 @@ let python_highlight_all = 1
 " buftabline
 let g:buftabline_indicators = 1
 
+" rust
+let g:rustfmt_autosave = 1
 
 filetype plugin indent on
 syntax on
