@@ -55,6 +55,7 @@ let NERDTreeIgnore = ['\.pyc$']
 
 " ctrl p
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_custom_ignore = 'node_modules\|build\|vendor'
 
 " syntastic
 let g:syntastic_python_checkers=['flake8']
