@@ -28,9 +28,10 @@ alias unix2date="perl -e 'print scalar localtime \$ARGV[0]'"
 alias ipof="ec2 ls -f private_ip"
 alias vi=vim
 
-export PATH=~/bin:$PATH
 export EDITOR=vim
 export GOPATH=$HOME/go
+export GOROOT=$HOME/go
+export PATH=~/bin:/usr/local/go/bin:${PATH}:${GOROOT}/bin
 
 [ -e "$HOME/z/z.sh" ] && source $HOME/z/z.sh
 
