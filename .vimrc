@@ -19,6 +19,8 @@ Plugin 'ap/vim-buftabline'
 Plugin 'w0rp/ale'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'michaeljsmith/vim-indent-object'
+Plugin 'mileszs/ack.vim'
+
 " golang
 Plugin 'fatih/vim-go'
 " python
@@ -36,7 +38,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'Quramy/tsuquyomi'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'Quramy/vim-js-pretty-template'
-Plugin 'ason0x43/vim-js-indent'
+Plugin 'jason0x43/vim-js-indent'
 
 " tmux
 Plugin 'christoomey/vim-tmux-navigator'
@@ -95,14 +97,8 @@ set shiftwidth=4
 set expandtab
 set ai
 
-" yaml
-autocmd FileType yaml set tabstop=2 softtabstop=2 shiftwidth=2
-" ruby
-autocmd FileType ruby set tabstop=2 softtabstop=2 shiftwidth=2
-" js
-autocmd FileType javascript set tabstop=2 softtabstop=2 shiftwidth=2
-" terraform
-autocmd FileType tf set tabstop=2 softtabstop=2 shiftwidth=2
+" special cases
+autocmd FileType yaml,ruby,javascript,typescript,tf setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 " http://vim.wikia.com/wiki/Modeline_magic
 set modeline
@@ -254,3 +250,14 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'typescript': ['tslint'],
 \}
+
+let g:ale_typescript_tslint_config_path = expand("~/tslint.yml")
+
+" ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+nnoremap <Leader>a :Ack!<C-r><C-w><CR>
+
+autocmd FileType typescript nmap <buffer> gd :TsuDefinition<CR>
