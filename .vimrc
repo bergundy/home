@@ -32,6 +32,12 @@ Plugin 'rust-lang/rust.vim'
 " js
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'pangloss/vim-javascript'
+" typescript
+Plugin 'Quramy/tsuquyomi'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'Quramy/vim-js-pretty-template'
+Plugin 'ason0x43/vim-js-indent'
+
 " tmux
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'benmills/vimux'
