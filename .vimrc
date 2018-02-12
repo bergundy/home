@@ -261,3 +261,4 @@ endif
 nnoremap <Leader>a :Ack!<C-r><C-w><CR>
 
 autocmd FileType typescript nmap <buffer> gd :TsuDefinition<CR>
+imap <Tab> <C-x><C-o>
