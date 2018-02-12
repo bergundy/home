@@ -144,7 +144,7 @@ set statusline+=[line\ %l\/%L\ %c%V]
 "-------------------------------------------------------------------------------
 " Add the virtualenv's site-packages to vim path
 "-------------------------------------------------------------------------------
-if exists(":py") == 2
+if exists(":py")
     py << EOF
 import os.path
 import sys
@@ -155,7 +155,7 @@ if 'VIRTUAL_ENV' in os.environ:
     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
     execfile(activate_this, dict(__file__=activate_this))
 EOF
-elseif exists(":py3") == 2
+elseif exists(":py3")
     py3 << EOF
 import os.path
 import sys
