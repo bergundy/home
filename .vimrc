@@ -20,6 +20,7 @@ Plugin 'w0rp/ale'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'mileszs/ack.vim'
+Plugin 'AndrewRadev/sideways.vim'
 
 " golang
 Plugin 'fatih/vim-go'
@@ -262,3 +263,12 @@ nnoremap <Leader>a :Ack!<C-r><C-w><CR>
 
 autocmd FileType typescript nmap <buffer> gd :TsuDefinition<CR>
 imap <Tab> <C-x><C-o>
+
+" OMG argument text objects
+nnoremap <Leader>h :SidewaysLeft<CR>
+nnoremap <Leader>l :SidewaysRight<CR>
+
+omap aa <Plug>SidewaysArgumentTextobjA
+xmap aa <Plug>SidewaysArgumentTextobjA
+omap ia <Plug>SidewaysArgumentTextobjI
+xmap ia <Plug>SidewaysArgumentTextobjI
