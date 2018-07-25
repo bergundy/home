@@ -18,3 +18,7 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[github]
+	user = bergundy
+[ghi]
+	token = !security find-internet-password -a bergundy -s github.com -l 'ghi token' -w
