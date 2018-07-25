@@ -5,57 +5,67 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-"Plugin 'tpope/vim-repeat' " Conflicts with vim-tmux-navigator
-Plugin 'tpope/vim-surround'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'ap/vim-buftabline'
-Plugin 'w0rp/ale'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'michaeljsmith/vim-indent-object'
-Plugin 'mileszs/ack.vim'
-Plugin 'AndrewRadev/sideways.vim'
+Plug 'VundleVim/Vundle.vim'
+Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-repeat' " Conflicts with vim-tmux-navigator
+Plug 'tpope/vim-surround'
+" Plug 'ctrlpvim/ctrlp.vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'ap/vim-buftabline'
+Plug 'w0rp/ale'
+" Plug 'Valloric/YouCompleteMe'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'mileszs/ack.vim'
+Plug 'AndrewRadev/sideways.vim'
 
 " golang
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go'
 " python
-Plugin 'davidhalter/jedi-vim'
-Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'nvie/vim-flake8'
+Plug 'davidhalter/jedi-vim'
+Plug 'hynek/vim-python-pep8-indent'
+Plug 'nvie/vim-flake8'
 " clojure
-Plugin 'guns/vim-clojure-static'
+Plug 'guns/vim-clojure-static'
 " rust
-Plugin 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
 " js
-Plugin 'maksimr/vim-jsbeautify'
-Plugin 'pangloss/vim-javascript'
+Plug 'maksimr/vim-jsbeautify'
+Plug 'pangloss/vim-javascript'
 " typescript
-Plugin 'Quramy/tsuquyomi'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'Quramy/vim-js-pretty-template'
-Plugin 'jason0x43/vim-js-indent'
+Plug 'Quramy/tsuquyomi'
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/vim-js-pretty-template'
+Plug 'jason0x43/vim-js-indent'
 
 " tmux
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'benmills/vimux'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'benmills/vimux'
 
-Plugin 'tomtom/tcomment_vim'
-Plugin 'cocopon/iceberg.vim' " colorscheme
+Plug 'tomtom/tcomment_vim'
+Plug 'cocopon/iceberg.vim' " colorscheme
 
-Plugin 'tikhomirov/vim-glsl'
+Plug 'tikhomirov/vim-glsl'
 
-Plugin 'hashivim/vim-hashicorp-tools'
+Plug 'hashivim/vim-hashicorp-tools'
+Plug 'chr4/nginx.vim'
+Plug 'lepture/vim-jinja'
 
-call vundle#end()            " required
+call plug#end()            " required
 
-call tcomment#DefineType('glsl', '// %s')
-call tcomment#DefineType('kivy', '# %s')
+call tcomment#type#Define('glsl', '// %s')
+call tcomment#type#Define('kivy', '# %s')
 
 " nerdtree
 map <C-N> :NERDTreeToggle<CR>
@@ -63,8 +73,8 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let NERDTreeIgnore = ['\.pyc$']
 
 " ctrl p
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_custom_ignore = 'node_modules\|build\|vendor'
+" set runtimepath^=~/.vim/bundle/ctrlp.vim
+" let g:ctrlp_custom_ignore = 'node_modules\|build\|vendor'
 
 " syntastic
 let g:syntastic_python_checkers=['flake8']
@@ -259,10 +269,14 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
-nnoremap <Leader>a :Ack!<C-r><C-w><CR>
+" nnoremap <Leader>a :Ack!<C-r><C-w><CR>
 
 autocmd FileType typescript nmap <buffer> gd :TsuDefinition<CR>
-imap <Tab> <C-x><C-o>
+autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+let g:tsuquyomi_use_local_typescript = 0 " See: https://github.com/Quramy/tsuquyomi/issues/231
+
+autocmd FileType python nmap <buffer> gd <Leader>d<CR>
+" imap <Tab> <C-x><C-o>
 
 " OMG argument text objects
 nnoremap <Leader>h :SidewaysLeft<CR>
@@ -272,3 +286,13 @@ omap aa <Plug>SidewaysArgumentTextobjA
 xmap aa <Plug>SidewaysArgumentTextobjA
 omap ia <Plug>SidewaysArgumentTextobjI
 xmap ia <Plug>SidewaysArgumentTextobjI
+
+" fzf
+let g:fzf_command_prefix = 'Fzf'
+
+" Search binaris folder
+nnoremap <Leader>a :call fzf#vim#ag(expand('~/bn'), '"^(?=.)"', 0)<CR>
+nnoremap <c-a> :let $FZF_DEFAULT_COMMAND='ag -p ~/bn/.ignore --hidden -g "" ~/bn' <bar> FzfFiles<CR>
+nnoremap <c-p> :FzfGFiles<CR>
+
+autocmd BufEnter * silent! lcd %:p:h " auto chdir (so ctrl-p respects the file's project)
