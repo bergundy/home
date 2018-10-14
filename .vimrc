@@ -272,6 +272,7 @@ endif
 " nnoremap <Leader>a :Ack!<C-r><C-w><CR>
 
 autocmd FileType typescript nmap <buffer> gd :TsuDefinition<CR>
+autocmd FileType typescript nmap <buffer> gb :TsuGoBack<CR>
 autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 let g:tsuquyomi_use_local_typescript = 0 " See: https://github.com/Quramy/tsuquyomi/issues/231
 
