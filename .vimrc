@@ -297,3 +297,4 @@ nnoremap <c-a> :let $FZF_DEFAULT_COMMAND='ag -p ~/bn/.ignore --hidden -g "" ~/bn
 nnoremap <c-p> :FzfGFiles<CR>
 
 autocmd BufEnter * silent! lcd %:p:h " auto chdir (so ctrl-p respects the file's project)
+autocmd BufRead,BufNewFile Jenkinsfile setfiletype groovy
