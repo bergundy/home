@@ -263,6 +263,7 @@ let g:ale_linters = {
 \}
 
 let g:ale_typescript_tslint_config_path = expand("~/tslint.yml")
+nmap gl :ALEFirst<CR>
 
 " ack
 if executable('ag')
@@ -273,7 +274,7 @@ endif
 
 autocmd FileType typescript nmap <buffer> gd :TsuDefinition<CR>
 autocmd FileType typescript nmap <buffer> gb :TsuGoBack<CR>
-autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+autocmd FileType typescript nmap <buffer> gh : <C-u>echo tsuquyomi#hint()<CR>
 let g:tsuquyomi_use_local_typescript = 0 " See: https://github.com/Quramy/tsuquyomi/issues/231
 
 autocmd FileType python nmap <buffer> gd <Leader>d<CR>
@@ -297,4 +298,5 @@ nnoremap <c-a> :let $FZF_DEFAULT_COMMAND='ag -p ~/bn/.ignore --hidden -g "" ~/bn
 nnoremap <c-p> :FzfGFiles<CR>
 
 autocmd BufEnter * silent! lcd %:p:h " auto chdir (so ctrl-p respects the file's project)
+autocmd BufRead,BufNewFile *.Jenkinsfile setfiletype groovy
 autocmd BufRead,BufNewFile Jenkinsfile setfiletype groovy
