@@ -28,6 +28,7 @@ alias unix2date="perl -e 'print scalar localtime \$ARGV[0]'"
 alias ipof="ec2 ls -f private_ip"
 alias vi=vim
 alias gfrb='git fetch && git rebase origin/master'
+alias gcor='git recent | fzf | xargs git checkout'
 
 export EDITOR=vim
 export GOPATH=$HOME/go
