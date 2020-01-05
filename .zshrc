@@ -1,6 +1,6 @@
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="gentoo"
-plugins=(git redis-cli zsh-syntax-highlighting docker supervisor docker-compose tmuxinator fabric)
+plugins=(zsh-syntax-highlighting git redis-cli docker supervisor docker-compose tmuxinator fabric)
 fpath=($HOME/gcloud-zsh-completion/src $fpath)
 
 source $ZSH/oh-my-zsh.sh
@@ -44,3 +44,12 @@ export PATH=~/bin:${GOPATH}/bin:${PATH}
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
+export NVM_DIR="$HOME/.nvm"
+nvm() {
+    echo "🚨 NVM not loaded! Loading now..."
+    unset -f nvm
+    export NVM_PREFIX=$(brew --prefix nvm)
+    [ -s "$NVM_PREFIX/nvm.sh" ] && . "$NVM_PREFIX/nvm.sh"
+    nvm "$@"
+}

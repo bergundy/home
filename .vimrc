@@ -16,6 +16,9 @@ call plug#begin('~/.vim/plugged')
 
 " let Vundle manage Vundle, required
 Plug 'VundleVim/Vundle.vim'
+
+Plug 'neoclide/coc.nvim',  {'do': { -> coc#util#install()}}
+
 Plug 'tpope/vim-fugitive'
 "Plug 'tpope/vim-repeat' " Conflicts with vim-tmux-navigator
 Plug 'tpope/vim-surround'
@@ -24,11 +27,12 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ap/vim-buftabline'
-Plug 'w0rp/ale'
 " Plug 'Valloric/YouCompleteMe'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'mileszs/ack.vim'
 Plug 'AndrewRadev/sideways.vim'
+
+Plug 'ConradIrwin/vim-bracketed-paste'
 
 " golang
 Plug 'fatih/vim-go'
@@ -44,10 +48,12 @@ Plug 'rust-lang/rust.vim'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'pangloss/vim-javascript'
 " typescript
-Plug 'Quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/vim-js-pretty-template'
 Plug 'jason0x43/vim-js-indent'
+
+" gdscript
+Plug 'calviken/vim-gdscript3'
 
 " tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -76,11 +82,6 @@ let NERDTreeIgnore = ['\.pyc$']
 " set runtimepath^=~/.vim/bundle/ctrlp.vim
 " let g:ctrlp_custom_ignore = 'node_modules\|build\|vendor'
 
-" syntastic
-let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_args='--max-line-length 120'
-let g:syntastic_always_populate_loc_list = 1
-
 " python
 let g:jedi#show_call_signatures = "2"
 let python_highlight_all = 1
@@ -94,8 +95,24 @@ let g:rustfmt_autosave = 1
 filetype plugin indent on
 syntax on
 
+
+" Some server have issues with backup files,  see #649
+set nobackup
+set nowritebackup
+
+set cmdheight=2
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
 " buffers
 set hidden
+
 nnoremap <C-O> :bnext<CR>
 nnoremap <C-I> :bprev<CR>
 nnoremap <C-W> :bdelete<CR>
@@ -126,25 +143,12 @@ set showcmd                             " display incomplete commands
 
 let mapleader="`"
 
-function! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-
-    return l:counts.total == 0 ? 'OK' : printf(
-    \   '%dW %dE',
-    \   all_non_errors,
-    \   all_errors
-    \)
-endfunction
-
 " always show statusline
 set ls=2
 set statusline=%F%m%r%h%w
 set statusline+=%= " stick to right
 set statusline+=%#warningmsg#
-set statusline+=%{LinterStatus()}
+set statusline+=%{coc#status()}
 set statusline+=%*
 set statusline+=[line\ %l\/%L\ %c%V]
 
@@ -247,23 +251,10 @@ endfunction
 let &t_SI .= WrapForTmux("\<Esc>[?2004h")
 let &t_EI .= WrapForTmux("\<Esc>[?2004l")
 
-function! XTermPasteBegin()
-  set pastetoggle=<Esc>[201~
-  set paste
-  return ""
-endfunction
-
-inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 map <Leader>rp :call VimuxRunCommand("clear; python " . bufname("%"))<CR>
 
-" ale
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'typescript': ['tslint'],
-\}
-
 let g:ale_typescript_tslint_config_path = expand("~/tslint.yml")
-nmap gl :ALEFirst<CR>
+nmap gl <Plug>(coc-diagnostic-prev)
 
 " ack
 if executable('ag')
@@ -272,13 +263,44 @@ endif
 
 " nnoremap <Leader>a :Ack!<C-r><C-w><CR>
 
-autocmd FileType typescript nmap <buffer> gd :TsuDefinition<CR>
-autocmd FileType typescript nmap <buffer> gb :TsuGoBack<CR>
-autocmd FileType typescript nmap <buffer> gh : <C-u>echo tsuquyomi#hint()<CR>
-let g:tsuquyomi_use_local_typescript = 0 " See: https://github.com/Quramy/tsuquyomi/issues/231
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_leading_spaces() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-autocmd FileType python nmap <buffer> gd <Leader>d<CR>
-" imap <Tab> <C-x><C-o>
+function! s:check_leading_spaces() abort
+  let col = col('.') - 1
+  return !col || getline('.')[0:col - 1] =~# '\v^\s+$'
+endfunction
+
+" Use <c-space> for trigger completion.
+" inoremap <silent><expr> <c-space> echo "yay"
+inoremap <silent><expr> <c-x><c-o> coc#refresh()
+
+" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> gb <c-o>
+
+" Use K for show documentation in preview window
+nnoremap <silent> gh :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 " OMG argument text objects
 nnoremap <Leader>h :SidewaysLeft<CR>
@@ -300,3 +322,7 @@ nnoremap <c-p> :FzfGFiles<CR>
 autocmd BufEnter * silent! lcd %:p:h " auto chdir (so ctrl-p respects the file's project)
 autocmd BufRead,BufNewFile *.Jenkinsfile setfiletype groovy
 autocmd BufRead,BufNewFile Jenkinsfile setfiletype groovy
+autocmd BufNewFile, BufRead *.tsx setlocal filetype=typescript.tsx
+
+" Force Saving Files that Require Root Permission
+cmap w!! %!sudo tee > /dev/null %
