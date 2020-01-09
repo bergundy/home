@@ -30,6 +30,7 @@ alias vi=vim
 alias gfrb='git fetch && git rebase origin/master'
 alias gcor='git recent | fzf | xargs git checkout'
 
+export LC_ALL=en_US.UTF-8
 export EDITOR=vim
 export GOPATH=$HOME/go
 export PATH=~/bin:${GOPATH}/bin:${PATH}
