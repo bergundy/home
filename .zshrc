@@ -1,6 +1,6 @@
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="gentoo"
-plugins=(zsh-syntax-highlighting git redis-cli docker supervisor docker-compose tmuxinator fabric)
+plugins=(zsh-syntax-highlighting fzf git redis-cli docker supervisor docker-compose tmuxinator fabric)
 fpath=($HOME/gcloud-zsh-completion/src $fpath)
 
 source $ZSH/oh-my-zsh.sh
@@ -36,15 +36,6 @@ export GOPATH=$HOME/go
 export PATH=~/bin:${GOPATH}/bin:${PATH}
 
 [ -e "$HOME/z/z.sh" ] && source $HOME/z/z.sh
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 
 export NVM_DIR="$HOME/.nvm"
 nvm() {

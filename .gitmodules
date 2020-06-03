@@ -7,3 +7,6 @@
 [submodule "/Users/roeyberman/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
 	path = .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
+[submodule "/home/bergundy/.tmux/plugins/tpm"]
+	path = /home/bergundy/.tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
