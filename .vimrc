@@ -22,8 +22,9 @@ Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
 Plug 'tpope/vim-fugitive'
 "Plug 'tpope/vim-repeat' " Conflicts with vim-tmux-navigator
 Plug 'tpope/vim-surround'
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
+Plug 'junegunn/fzf.vim'
+
 Plug 'scrooloose/nerdtree'
 Plug 'ap/vim-buftabline'
 " Plug 'Valloric/YouCompleteMe'
