@@ -67,6 +67,7 @@ Plug 'tikhomirov/vim-glsl'
 Plug 'hashivim/vim-hashicorp-tools'
 Plug 'chr4/nginx.vim'
 Plug 'lepture/vim-jinja'
+Plug 'cespare/vim-toml'
 
 call plug#end()            " required
 
@@ -287,8 +288,8 @@ xmap ia <Plug>SidewaysArgumentTextobjI
 let g:fzf_command_prefix = 'Fzf'
 
 " Search binaris folder
-nnoremap <Leader>a :call fzf#vim#ag(expand('~/bn'), '"^(?=.)"', 0)<CR>
-nnoremap <c-a> :let $FZF_DEFAULT_COMMAND='ag -p ~/bn/.ignore --hidden -g "" ~/bn' <bar> FzfFiles<CR>
+nnoremap <Leader>a :call fzf#vim#ag(expand('~/dev'), '"^(?=.)"', 0)<CR>
+nnoremap <c-a> :let $FZF_DEFAULT_COMMAND='ag -p ~/dev/.ignore --hidden -g "" ~/dev' <bar> FzfFiles<CR>
 nnoremap <c-p> :FzfGFiles<CR>
 
 autocmd BufEnter * silent! lcd %:p:h " auto chdir (so ctrl-p respects the file's project)
