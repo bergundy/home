@@ -45,3 +45,18 @@ nvm() {
     [ -s "$NVM_PREFIX/nvm.sh" ] && . "$NVM_PREFIX/nvm.sh"
     nvm "$@"
 }
+
+export PATH="$HOME/.local/bin:$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# WSL (Windows Subsystem for Linux) specific settings.
+if grep -qE "(microsoft|WSL)" /proc/version &>/dev/null; then
+    # Adjustments for WSL's file / folder permission metadata.
+    if [ "$(umask)" = "0000" ]; then
+        umask 0022
+    fi
+    # Access local X-server with VcXsrv.
+    # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
+    export DISPLAY=$(awk '/^nameserver/ {print $2}' /etc/resolv.conf):0
+fi

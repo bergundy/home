@@ -17,14 +17,13 @@ call plug#begin('~/.vim/plugged')
 " let Vundle manage Vundle, required
 Plug 'VundleVim/Vundle.vim'
 
-Plug 'neoclide/coc.nvim',  {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
 
 Plug 'tpope/vim-fugitive'
 "Plug 'tpope/vim-repeat' " Conflicts with vim-tmux-navigator
 Plug 'tpope/vim-surround'
 " Plug 'ctrlpvim/ctrlp.vim'
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
 Plug 'scrooloose/nerdtree'
 Plug 'ap/vim-buftabline'
 " Plug 'Valloric/YouCompleteMe'
@@ -47,6 +46,7 @@ Plug 'rust-lang/rust.vim'
 " js
 Plug 'maksimr/vim-jsbeautify'
 Plug 'pangloss/vim-javascript'
+Plug 'OmniSharp/omnisharp-vim'
 " typescript
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/vim-js-pretty-template'
@@ -134,6 +134,7 @@ set modeline
 set modelines=5
 
 " appearance
+colorscheme blue
 colorscheme iceberg
 
 
@@ -299,3 +300,7 @@ autocmd BufNewFile, BufRead *.tsx setlocal filetype=typescript.tsx
 
 " Force Saving Files that Require Root Permission
 cmap w!! %!sudo tee > /dev/null %
+
+let g:OmniSharp_server_stdio = 1
+" let g:OmniSharp_server_path = '/mnt/c/Users/roeyb/.vscode/extensions/ms-dotnettools.csharp-1.21.18/.omnisharp/1.35.1/OmniSharp.exe'
+" let g:OmniSharp_translate_cygwin_wsl = 1
