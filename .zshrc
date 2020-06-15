@@ -1,5 +1,5 @@
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="awesomepanda"
+ZSH_THEME="gentoo"
 plugins=(zsh-syntax-highlighting fzf git redis-cli docker supervisor docker-compose tmuxinator fabric)
 fpath=($HOME/gcloud-zsh-completion/src $fpath)
 
