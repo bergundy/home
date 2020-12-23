@@ -27,7 +27,7 @@ alias activate="source .pyenv/bin/activate"
 alias unix2date="perl -e 'print scalar localtime \$ARGV[0]'"
 alias ipof="ec2 ls -f private_ip"
 alias vi=vim
-alias gfrb='git fetch && git rebase origin/master'
+alias gfrb='git fetch && git rebase $(git rev-parse --abbrev-ref origin/HEAD -- 2> /dev/null || echo origin/master)'
 alias gcor='git recent | fzf | xargs git checkout'
 
 export LC_ALL=en_US.UTF-8
@@ -36,6 +36,10 @@ export GOPATH=$HOME/go
 export PATH=~/bin:${GOPATH}/bin:${PATH}
 
 [ -e "$HOME/z/z.sh" ] && source $HOME/z/z.sh
+if which exa &> /dev/null; then
+    alias ls=exa
+    alias ll='exa --long --git'
+fi
 
 export NVM_DIR="$HOME/.nvm"
 nvm() {

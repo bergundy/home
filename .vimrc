@@ -37,11 +37,13 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 " golang
 Plug 'fatih/vim-go'
 " python
-Plug 'davidhalter/jedi-vim'
+" Plug 'davidhalter/jedi-vim'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'nvie/vim-flake8'
 " clojure
 Plug 'guns/vim-clojure-static'
+" Plug 'clojure-vim/async-clj-omni'
+" Plug 'tpope/vim-fireplace'
 " rust
 Plug 'rust-lang/rust.vim'
 " js
@@ -69,6 +71,7 @@ Plug 'hashivim/vim-hashicorp-tools'
 Plug 'chr4/nginx.vim'
 Plug 'lepture/vim-jinja'
 Plug 'cespare/vim-toml'
+Plug 'mzlogin/vim-markdown-toc'
 
 call plug#end()            " required
 
