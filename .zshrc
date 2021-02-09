@@ -50,7 +50,7 @@ nvm() {
     nvm "$@"
 }
 
-export PATH="$HOME/.local/bin:$HOME/.pyenv/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
