@@ -100,8 +100,11 @@ let g:rustfmt_autosave = 1
 filetype plugin indent on
 syntax on
 
+set backupdir=~/.vim/tmp//
+set directory=~/.vim/tmp//
+set undodir=~/.vim/tmp//
 
-" Some server have issues with backup files,  see #649
+" Some servers have issues with backup files,  see #649
 set nobackup
 set nowritebackup
 
@@ -131,7 +134,7 @@ set expandtab
 set ai
 
 " special cases
-autocmd FileType yaml,ruby,javascript,typescript,tf setlocal tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType yaml,ruby,javascript,typescript,tf,json setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 " http://vim.wikia.com/wiki/Modeline_magic
 set modeline
@@ -308,3 +311,6 @@ cmap w!! %!sudo tee > /dev/null %
 let g:OmniSharp_server_stdio = 1
 " let g:OmniSharp_server_path = '/mnt/c/Users/roeyb/.vscode/extensions/ms-dotnettools.csharp-1.21.18/.omnisharp/1.35.1/OmniSharp.exe'
 " let g:OmniSharp_translate_cygwin_wsl = 1
+
+let g:vmt_list_item_char = '-'
+

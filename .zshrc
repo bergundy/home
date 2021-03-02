@@ -64,3 +64,4 @@ if grep -qE "(microsoft|WSL)" /proc/version &>/dev/null; then
     # Requires: https://sourceforge.net/projects/vcxsrv/ (or alternative)
     export DISPLAY=$(awk '/^nameserver/ {print $2}' /etc/resolv.conf):0
 fi
+export PATH="/usr/local/opt/llvm/bin:$PATH"
