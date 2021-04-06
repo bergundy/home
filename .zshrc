@@ -41,6 +41,10 @@ if which exa &> /dev/null; then
     alias ll='exa --long --git'
 fi
 
+if which bat &> /dev/null; then
+    alias cat=bat
+fi
+
 export NVM_DIR="$HOME/.nvm"
 nvm() {
     echo "🚨 NVM not loaded! Loading now..."
