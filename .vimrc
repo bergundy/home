@@ -46,14 +46,8 @@ Plug 'guns/vim-clojure-static'
 " Plug 'tpope/vim-fireplace'
 " rust
 Plug 'rust-lang/rust.vim'
-" js
-Plug 'maksimr/vim-jsbeautify'
-Plug 'pangloss/vim-javascript'
-Plug 'OmniSharp/omnisharp-vim'
 " typescript
 Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/vim-js-pretty-template'
-Plug 'jason0x43/vim-js-indent'
 
 " gdscript
 Plug 'calviken/vim-gdscript3'
@@ -331,9 +325,9 @@ xmap ia <Plug>SidewaysArgumentTextobjI
 " fzf
 let g:fzf_command_prefix = 'Fzf'
 
-" Search binaris folder
-nnoremap <Leader>a :call fzf#vim#ag(expand('~/dev'), '"^(?=.)"', 0)<CR>
-nnoremap <c-a> :let $FZF_DEFAULT_COMMAND='ag -p ~/dev/.ignore --hidden -g "" ~/dev' <bar> FzfFiles<CR>
+" Search home folder
+nnoremap <Leader>a :call fzf#vim#ag(expand('~'), '"^(?=.)"', 0)<CR>
+nnoremap <c-a> :let $FZF_DEFAULT_COMMAND='ag -p ~/.ignore --hidden -g "" ~' <bar> FzfFiles<CR>
 nnoremap <c-p> :FzfGFiles<CR>
 
 autocmd BufEnter * silent! lcd %:p:h " auto chdir (so ctrl-p respects the file's project)
